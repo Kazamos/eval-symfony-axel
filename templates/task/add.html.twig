@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle tâche{% endblock %}
+
+{% block body %}
+    <main class="container-fluid">
+
+        <h1>Créer une nouvelle tâche</h1>
+
+        {{ form_start(form) }}
+            {{ form_row(form.title) }}
+            {{ form_row(form.content) }}
+            {{ form_row(form.createdAt) }}
+            {{ form_row(form.expiredAt) }}
+            <button class="btn btn-success">Enregistrer</button>
+        {{ form_end(form) }}
+
+        <hr>
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label == 'danger' ? 'danger' : 'success' }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+        <a href="{{ path('app_tasks') }}">Retour à la liste</a>
+    </main>
+{% endblock %}

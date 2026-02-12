@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des tâches{% endblock %}
+
+{% block body %}
+    <main class="container-fluid">
+        <h1>Mes Tâches</h1>
+
+        <a href="{{ path('app_task_add') }}" class="btn btn-primary">Ajouter une tâche</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Description</th>
+                    <th>Créée le</th>
+                    <th>Échéance</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.content }}</td>
+                    <td>{{ task.createdAt|date('d/m/Y H:i') }}</td>
+                    <td>{{ task.expiredAt ? task.expiredAt|date('d/m/Y') : 'N/A' }}</td>
+                    <td>{{ task.status ? '✅ Terminée' : '⏳ En cours' }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Aucune tâche trouvée.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </main>
+{% endblock %}
